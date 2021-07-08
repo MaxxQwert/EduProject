@@ -15,11 +15,12 @@ def timers(func):
         return_value = func(*args, **kwargs)
         end = time.time()
         if len(args) == 1:
-            typ = 'odd'
+            typ = 'even'
         else:
             typ = args[1]
         print(f'Execution time of a function with an argument \'{typ}\' : {end - start} секунд.')
         return return_value
+
     return wrapper
 
 
@@ -31,6 +32,7 @@ def is_prime(mum):
 
 def degree_of_numbers(numbers, degree=2):
     return list(map(lambda x: x ** degree, numbers))
+
 
 @timers
 def even_odd_prime(numbers, typ='even'):
@@ -44,10 +46,9 @@ def even_odd_prime(numbers, typ='even'):
     return 0
 
 
-a = list(i for i in range(10000))
+a = list(i for i in range(5000))
 print(degree_of_numbers(a, 3))
 print(even_odd_prime(a))
 print(even_odd_prime(a, 'odd'))
 print(even_odd_prime(a, 'prime'))
 print(even_odd_prime(a, 'prme'))
-print(even_odd_prime(a, 'prime'))
