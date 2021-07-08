@@ -28,13 +28,10 @@ def even_odd_prime(numbers, typ='even'):
     return 0
 
 
-a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+a = list(i for i in range(20))
 print(degree_of_numbers(a, 3))
 print(even_odd_prime(a))
 print(even_odd_prime(a, 'odd'))
 print(even_odd_prime(a, 'prime'))
 print(even_odd_prime(a, 'prme'))
-print(list(map(is_prime, a)))
-num = 2
-for i in range(2, num):
-    print(num % i)
+
