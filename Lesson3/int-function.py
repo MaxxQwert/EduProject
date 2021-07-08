@@ -7,6 +7,40 @@ keyword аргумент для выбора степени, в которую �
 """
 
 import time
+from functools import wraps
+
+
+def trace(ind: str):
+    """
+    Trace calls made to the decorated function.
+    """
+
+    def decorator(func):
+        lvl_count = 0
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            nonlocal lvl_count
+            print(f'{ind * lvl_count} --> {func.__name__}({args[0]})')
+            lvl_count += 1
+            res = func(*args, **kwargs)
+            lvl_count -= 1
+            print(f'{ind * lvl_count} <-- {func.__name__}({args[0]}) == {res}')
+
+            return res
+
+        return wrapper
+
+    return decorator
+
+
+@trace("____")
+def fib(x):
+    """Return fibonacci of x, where x is a non-negative int"""
+    if x == 0 or x == 1:
+        return 1
+    else:
+        return fib(x - 1) + fib(x - 2)
 
 
 def timers(func):
@@ -47,8 +81,9 @@ def even_odd_prime(numbers, typ='even'):
 
 
 a = list(i for i in range(5000))
-print(degree_of_numbers(a, 3))
-print(even_odd_prime(a))
-print(even_odd_prime(a, 'odd'))
-print(even_odd_prime(a, 'prime'))
-print(even_odd_prime(a, 'prme'))
+# print(degree_of_numbers(a, 3))
+# print(even_odd_prime(a))
+# print(even_odd_prime(a, 'odd'))
+# print(even_odd_prime(a, 'prime'))
+# print(even_odd_prime(a, 'prme'))
+print(fib(5))
