@@ -4,7 +4,7 @@ from VehicleErrors import *
 
 class Vehicle(VehicleABC):
 
-    def __init__(self, carrying: int, passenger: int, volume_tank=0, fuel_cons=0, type_vh='', type_eng=''):
+    def __init__(self, volume_tank=0, fuel_cons=0.0, carrying=0, passenger=0, type_vh='', type_eng=''):
         self.type_vh = type_vh
         self.type_eng = type_eng
         self.volume_tank = volume_tank
@@ -47,15 +47,15 @@ class Vehicle(VehicleABC):
 
 
 class Car(Vehicle):
-    def __init__(self, carrying: int, passenger: int, volume_tank, fuel_cons):
-        super().__init__(carrying, passenger, volume_tank, fuel_cons)
+    def __init__(self, volume_tank, fuel_cons, carrying, passenger):
+        super().__init__(volume_tank, fuel_cons, carrying, passenger)
         self.type_vh = 'Car'
         self.type_eng = 'Benzine'
 
 
 class Truck(Vehicle):
-    def __init__(self, carrying: int, passenger: int, volume_tank, fuel_cons):
-        super().__init__(carrying, passenger, volume_tank, fuel_cons)
+    def __init__(self, volume_tank, fuel_cons):
+        super().__init__(volume_tank, fuel_cons)
         self.type_vh = 'Truck'
         self.type_eng = 'Diesel'
 
@@ -64,8 +64,8 @@ class Truck(Vehicle):
 
 
 class Airplanes(Vehicle):
-    def __init__(self, carrying: int, passenger: int, volume_tank, fuel_cons):
-        super().__init__(carrying, passenger, volume_tank, fuel_cons)
+    def __init__(self, volume_tank, fuel_cons, carrying, passenger):
+        super().__init__(volume_tank, fuel_cons, carrying, passenger)
         self.type_vh = 'Airplanes'
         self.type_eng = 'Kerosene'
 
