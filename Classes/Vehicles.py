@@ -4,7 +4,7 @@ from VehicleErrors import *
 
 class Vehicle(VehicleABC):
 
-    def __init__(self, volume_tank=0, fuel_cons=0.0, carrying=0, passenger=0, type_vh='', type_eng=''):
+    def __init__(self, volume_tank, fuel_cons, carrying, passenger, type_vh, type_eng):
         self.type_vh = type_vh
         self.type_eng = type_eng
         self.volume_tank = volume_tank
@@ -48,36 +48,34 @@ class Vehicle(VehicleABC):
 
 class Car(Vehicle):
     def __init__(self, volume_tank, fuel_cons, carrying, passenger):
-        super().__init__(volume_tank, fuel_cons, carrying, passenger)
-        self.type_vh = 'Car'
-        self.type_eng = 'Benzine'
-
-
+        type_vh = 'Car'
+        type_eng = 'Benzine'
+        super().__init__(volume_tank, fuel_cons, carrying, passenger, type_vh, type_eng)
 class Truck(Vehicle):
     def __init__(self, volume_tank, fuel_cons):
-        super().__init__(volume_tank, fuel_cons)
-        self.type_vh = 'Truck'
-        self.type_eng = 'Diesel'
-
+        type_vh = 'Truck'
+        type_eng = 'Diesel'
+        carrying = 0
+        passenger = 0
+        super().__init__(volume_tank, fuel_cons, carrying, passenger, type_vh, type_eng)
     def dump_truck(self):
         print('Body raised')
 
 
 class Airplanes(Vehicle):
     def __init__(self, volume_tank, fuel_cons, carrying, passenger):
-        super().__init__(volume_tank, fuel_cons, carrying, passenger)
-        self.type_vh = 'Airplanes'
-        self.type_eng = 'Kerosene'
+        type_vh = 'Airplanes'
+        type_eng = 'Kerosene'
+        super().__init__(volume_tank, fuel_cons, carrying, passenger, type_vh, type_eng)
 
 
 class Sailboat(Vehicle):
-    def __init__(self, carrying: int, passenger: int):
-
-        super().__init__(carrying, passenger)
-
-        self.type_vh = 'Sailboat'
-        self.type_eng = 'Sail'
-        self.volume_tank = 0
+    def __init__(self, carrying, passenger):
+        type_vh = 'Sailboat'
+        type_eng = 'Sail'
+        volume_tank = 0
+        fuel_cons = 0
+        super().__init__(volume_tank, fuel_cons, carrying, passenger, type_vh, type_eng)
         self.status_sail = False
 
     def sail_open(self, status: bool) -> bool:

@@ -1,7 +1,7 @@
 from Vehicles import Vehicle, Car, Sailboat, Airplanes, Truck
 
 vehicles = Vehicle(100, 0.1, 300, 8, 'Super Car', 'Benzine')
-bot = Sailboat(passenger=10, carrying=500)
+bot = Sailboat(10, 500)
 car = Car(80, 0.05, 200, 5)
 air = Airplanes(800, 200, 10000, 2)
 truk = Truck(300, 2)
