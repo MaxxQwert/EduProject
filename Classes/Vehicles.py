@@ -19,28 +19,31 @@ class Vehicle(VehicleABC):
 
     def start_engine(self, status: bool) -> bool:
         if (not self.status_engine) and (not status):
-            raise VehicleError('Already stopped')
+            raise VehicleError('Engine already stopped')
         elif self.status_engine and status:
-            raise VehicleError('Already started')
+            raise VehicleError('Engine already started')
         elif self.volume_fuel == 0:
-            raise VehicleError('The tank is empty')
+            raise VehicleError('Start engine not possible, the tank is empty')
         self.status_engine = True
         print(f'Engine is started, value of fuel {self.volume_fuel} l')
         return True
 
     def refuel(self, val: int) -> int:
         if val + self.volume_fuel > self.volume_tank:
-            raise VehicleError('Overflow tank')
+            raise VehicleError(f'Overflow tank, max value {self.volume_tank-self.volume_fuel}')
         self.volume_fuel += val
         print(f'The tank is filled successfully, the volume of fuel in the tank {self.volume_fuel}')
         return self.volume_fuel
 
     def draw(self, val: int) -> bool:
         if self.volume_fuel == 0:
-            raise VehicleError('The tank is empty')
+            raise VehicleError('Movement not possible, the tank is empty')
         elif not self.status_engine:
-            raise VehicleError('Engine not running')
+            raise VehicleError('Movement not possible, engine not running')
+        elif self.fuel_cons * val > self.volume_fuel:
+            raise VehicleError(f'For drawing in {val} km, fuel not enough')
         self.volume_fuel -= self.fuel_cons * val
+
         print(
             f'The {self.type_vh} has successfully moved {val} km, the remaining fuel in the tank {self.volume_fuel} l')
         return True
@@ -80,16 +83,16 @@ class Sailboat(Vehicle):
 
     def sail_open(self, status: bool) -> bool:
         if (not self.status_sail) and (not status):
-            raise VehicleError('Already stopped')
+            raise VehicleError('The sail is already folded')
         elif self.status_sail and status:
-            raise VehicleError('Already started')
+            raise VehicleError('The sail is already unfolded')
         self.status_sail = True
         print(f'Sail is open')
         return True
 
     def draw(self, val: int) -> bool:
-        if not self.status_engine:
-            raise VehicleError('Engine not running')
+        if not self.status_sail:
+            raise VehicleError('The sail folded')
         print(
             f'The {self.type_vh} has successfully moved {val} km')
         return True
