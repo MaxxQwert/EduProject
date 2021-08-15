@@ -5,7 +5,7 @@ metadata = MetaData()
 print()
 
 users_table = Table(
-    "users5",
+    "users6",
     metadata,
     Column("id", Integer, primary_key=True),
     Column("username", String(32), unique=True),

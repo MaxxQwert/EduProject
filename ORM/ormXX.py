@@ -1,12 +1,12 @@
 from sqlalchemy import MetaData, create_engine, Table
 
 engine = create_engine("postgresql://postgres:0000@localhost/maxx")
-metadata = MetaData(bind=engine)
+metadata = MetaData(engine)
 
 
 def main():
     users_table = Table(
-        "table_name",
+        "users",
         metadata,
         autoload=True,
     )
